@@ -4,18 +4,19 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
 export const prerender = true;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <Base title="Contact Us – Tabassum Foundation">
   <Navbar transparent={true} />
 
-  <!-- HERO: video background matching About & Activities pages -->
   <section class="hero-video-container">
     <video autoplay muted loop playsinline preload="none"
       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"
       aria-hidden="true">
-      <source src="/video/contact.webm" type="video/webm" />
-      <source src="/video/contact.mp4" type="video/mp4" />
+      <source src={`${base}/video/contact.webm`} type="video/webm" />
+      <source src={`${base}/video/contact.mp4`} type="video/mp4" />
     </video>
     <div class="hero-overlay" style="background:linear-gradient(135deg,rgba(13,92,88,0.82) 0%,rgba(13,92,88,0.52) 60%,rgba(0,0,0,0.45) 100%);"></div>
     <div class="hero-content max-w-7xl mx-auto w-full px-6 md:px-12" style="margin-top:-80px;">
@@ -40,7 +41,6 @@ export const prerender = true;
     <div class="max-w-6xl mx-auto">
       <div class="grid md:grid-cols-2 gap-16">
 
-        <!-- Contact Info -->
         <div class="reveal">
           <span class="section-label">Reach Us</span>
           <h2 class="section-title mt-2 mb-8">Let's connect</h2>
@@ -113,7 +113,6 @@ export const prerender = true;
             </div>
           </div>
 
-          <!-- Social -->
           <div class="mt-8">
             <h4 class="font-semibold text-gray-700 mb-4 text-sm">Follow Us</h4>
             <div class="flex gap-3">
@@ -125,7 +124,6 @@ export const prerender = true;
           </div>
         </div>
 
-        <!-- Contact Form -->
         <div class="reveal" style="transition-delay: 0.2s">
           <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
             <h3 class="font-display text-xl font-semibold text-gray-800 mb-6">Send us a message</h3>
@@ -134,52 +132,32 @@ export const prerender = true;
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1.5">First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    required
-                    placeholder="Ahmed"
-                    class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
-                  />
+                  <input type="text" name="firstName" required placeholder="Ahmed"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1.5">Last Name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Khan"
-                    class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
-                  />
+                  <input type="text" name="lastName" placeholder="Khan"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100" />
                 </div>
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="you@example.com"
-                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
-                />
+                <input type="email" name="email" required placeholder="you@example.com"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100" />
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Phone (optional)</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="+92 300 0000000"
-                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
-                />
+                <input type="tel" name="phone" placeholder="+92 300 0000000"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100" />
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Subject</label>
-                <select
-                  name="subject"
-                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-gray-600"
-               >
+                <select name="subject"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-gray-600">
                   <option value="">Select a subject</option>
                   <option>General Inquiry</option>
                   <option>Volunteer</option>
@@ -191,20 +169,11 @@ export const prerender = true;
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Message</label>
-                <textarea
-                  name="message"
-                  required
-                  rows="4"
-                  placeholder="How can we help you?"
-                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 resize-none"
-               ></textarea>
+                <textarea name="message" required rows="4" placeholder="How can we help you?"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 resize-none"></textarea>
               </div>
 
-              <button
-                type="submit"
-                class="w-full btn-primary py-3.5 justify-center text-base"
-                id="submit-btn"
-             >
+              <button type="submit" class="w-full btn-primary py-3.5 justify-center text-base" id="submit-btn">
                 Send Message →
               </button>
 
@@ -216,7 +185,6 @@ export const prerender = true;
         </div>
       </div>
 
-      <!-- Map -->
       <div class="reveal mt-16">
         <h3 class="font-display text-xl font-semibold text-gray-800 mb-4">Find Us</h3>
         <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100 h-72">
@@ -229,7 +197,7 @@ export const prerender = true;
             allowfullscreen
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-         ></iframe>
+          ></iframe>
         </div>
       </div>
     </div>

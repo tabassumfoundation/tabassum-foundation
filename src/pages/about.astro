@@ -5,22 +5,23 @@ import Footer from '../components/Footer.astro';
 
 export const prerender = true;
 
-// Executive bodies — KEEP existing URLs (profile pics not yet replaced)
-const teamMembers = [
-  { name: 'Mr. Rameez Riaz',   role: 'Founder',          img: '/images/team/rameez-riaz.jpeg' },
-  { name: 'Ms. Mah Noor',      role: 'Chairperson',      img: '/images/team/mah-noor.jpeg' },
-  { name: 'Mr. Jalil Ahmed',   role: 'Co-Chairperson',   img: '/images/team/jalil-ahmed.jpeg' },
-  { name: 'Mr. Kamran Elahi',  role: 'Vice Chairperson', img: '/images/team/kamran-elahi.jpeg' },
-{ name: 'Ms. Waqar Un Nisa', role: 'General Secretary',img: '/images/team/waqar-un-nisa.jpeg' },
-{ name: 'Ms. Misbah Zahoor', role: 'Joint Secretary',  img: '/images/team/misbah-zahoor.jpeg' },
-{ name: 'Mr. Wajid Ali',     role: 'Finance Secretary',img: '/images/team/wajid-ali.jpeg' },];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// ── LOCAL gallery images for the "Who We Are" mosaic ─────────────────────
+const teamMembers = [
+  { name: 'Mr. Rameez Riaz',   role: 'Founder',          img: `${base}/images/team/rameez-riaz.jpeg` },
+  { name: 'Ms. Mah Noor',      role: 'Chairperson',      img: `${base}/images/team/mah-noor.jpeg` },
+  { name: 'Mr. Jalil Ahmed',   role: 'Co-Chairperson',   img: `${base}/images/team/jalil-ahmed.jpeg` },
+  { name: 'Mr. Kamran Elahi',  role: 'Vice Chairperson', img: `${base}/images/team/kamran-elahi.jpeg` },
+  { name: 'Ms. Waqar Un Nisa', role: 'General Secretary',img: `${base}/images/team/waqar-un-nisa.jpeg` },
+  { name: 'Ms. Misbah Zahoor', role: 'Joint Secretary',  img: `${base}/images/team/misbah-zahoor.jpeg` },
+  { name: 'Mr. Wajid Ali',     role: 'Finance Secretary',img: `${base}/images/team/wajid-ali.jpeg` },
+];
+
 const aboutGallery = [
-  { src: '/images/gallery/gallery-07.jpeg', alt: 'Tabassum Foundation volunteers with children' },
-  { src: '/images/gallery/gallery-08.jpeg', alt: 'Community programme organised by Tabassum Foundation' },
-  { src: '/images/gallery/gallery-09.jpeg', alt: 'Educational activity by Tabassum Foundation' },
-  { src: '/images/gallery/gallery-51.jpeg', alt: 'Health awareness session by Tabassum Foundation' },
+  { src: `${base}/images/gallery/gallery-07.jpeg`, alt: 'Tabassum Foundation volunteers with children' },
+  { src: `${base}/images/gallery/gallery-08.jpeg`, alt: 'Community programme organised by Tabassum Foundation' },
+  { src: `${base}/images/gallery/gallery-09.jpeg`, alt: 'Educational activity by Tabassum Foundation' },
+  { src: `${base}/images/gallery/gallery-51.jpeg`, alt: 'Health awareness session by Tabassum Foundation' },
 ];
 ---
 
@@ -30,13 +31,12 @@ const aboutGallery = [
 >
   <Navbar transparent={true} />
 
-  <!-- HERO: same full-screen height as home page, with about-specific video -->
   <section class="hero-video-container">
     <video autoplay muted loop playsinline preload="none"
       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"
       aria-hidden="true">
-      <source src="/video/about.webm" type="video/webm" />
-      <source src="/video/about.mp4" type="video/mp4" />
+      <source src={`${base}/video/about.webm`} type="video/webm" />
+      <source src={`${base}/video/about.mp4`} type="video/mp4" />
     </video>
     <div class="hero-overlay" style="background:linear-gradient(135deg,rgba(13,92,88,0.82) 0%,rgba(13,92,88,0.52) 60%,rgba(0,0,0,0.45) 100%);"></div>
     <div class="hero-content max-w-7xl mx-auto w-full px-6 md:px-12" style="margin-top:-80px;">
@@ -56,9 +56,7 @@ const aboutGallery = [
       </div>
     </div>
   </section>
-  
 
-  <!-- Who We Are -->
   <section class="py-20 px-6 md:px-12 bg-white" aria-labelledby="about-who-heading">
     <div class="max-w-7xl mx-auto">
       <div class="grid md:grid-cols-2 gap-16 items-center">
@@ -78,7 +76,6 @@ const aboutGallery = [
           </p>
         </div>
 
-        <!-- 2×2 mosaic — local images -->
         <div class="reveal grid grid-cols-2 gap-4" style="transition-delay:0.2s" aria-label="Foundation photo gallery">
           {aboutGallery.map((img, i) => (
             <img
@@ -96,7 +93,6 @@ const aboutGallery = [
     </div>
   </section>
 
-  <!-- Mission & Vision -->
   <section class="py-20 px-6 md:px-12" style="background:#f0faf9;" aria-labelledby="mission-heading">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14 reveal">
@@ -107,9 +103,7 @@ const aboutGallery = [
       <div class="grid md:grid-cols-2 gap-8">
         <div class="reveal bg-white rounded-2xl p-8 border border-teal-50 shadow-sm card-hover relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #1a9990, #3fb4aa);" aria-hidden="true"></div>
-          <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6" style="background: linear-gradient(135deg, #d9f2ef, #b3e5e0);" aria-hidden="true">
-            🎯
-          </div>
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6" style="background: linear-gradient(135deg, #d9f2ef, #b3e5e0);" aria-hidden="true">🎯</div>
           <h3 class="font-display text-2xl font-semibold text-gray-800 mb-4">Our Mission</h3>
           <p class="text-teal-700 font-medium italic text-base mb-4 leading-relaxed">
             "To promote the well-being of children and mothers through education, healthcare,
@@ -124,9 +118,7 @@ const aboutGallery = [
 
         <div class="reveal bg-white rounded-2xl p-8 border border-teal-50 shadow-sm card-hover relative overflow-hidden" style="transition-delay:0.15s">
           <div class="absolute top-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #3fb4aa, #7dd0c9);" aria-hidden="true"></div>
-          <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6" style="background: linear-gradient(135deg, #d9f2ef, #b3e5e0);" aria-hidden="true">
-            🌟
-          </div>
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6" style="background: linear-gradient(135deg, #d9f2ef, #b3e5e0);" aria-hidden="true">🌟</div>
           <h3 class="font-display text-2xl font-semibold text-gray-800 mb-4">Our Vision</h3>
           <p class="text-teal-700 font-medium italic text-base mb-4 leading-relaxed">
             "To build a society where every child and mother lives a safe, healthy, educated,
@@ -142,7 +134,6 @@ const aboutGallery = [
     </div>
   </section>
 
-  <!-- Executive Bodies -->
   <section class="py-20 px-6 md:px-12 bg-white" aria-labelledby="exec-heading">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14 reveal">

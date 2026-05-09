@@ -5,6 +5,8 @@ import Footer from '../components/Footer.astro';
 
 export const prerender = true;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const focusAreas = [
   {
     icon: '📚',
@@ -33,32 +35,27 @@ const focusAreas = [
   },
 ];
 
-// Executive bodies — images come from tabasumfoundation.org (left intentionally)
 const teamMembers = [
-  { name: 'Mr. Rameez Riaz',   role: 'Founder',          img: '/images/team/rameez-riaz.jpeg' },
-  { name: 'Ms. Mah Noor',      role: 'Chairperson',      img: '/images/team/mah-noor.jpeg' },
-  { name: 'Mr. Jalil Ahmed',   role: 'Co-Chairperson',   img: '/images/team/jalil-ahmed.jpeg' },
-  { name: 'Mr. Kamran Elahi',  role: 'Vice Chairperson', img: '/images/team/kamran-elahi.jpeg' },
-{ name: 'Ms. Waqar Un Nisa', role: 'General Secretary',img: '/images/team/waqar-un-nisa.jpeg' },
-{ name: 'Ms. Misbah Zahoor', role: 'Joint Secretary',  img: '/images/team/misbah-zahoor.jpeg' },
-{ name: 'Mr. Wajid Ali',     role: 'Finance Secretary',img: '/images/team/wajid-ali.jpeg' },];
-// ── LOCAL gallery images ──────────────────────────────────────────────────
-// Place YOUR 57 photos inside:  public/images/gallery/
-// Name them: gallery-01.jpg, gallery-02.jpg … gallery-57.jpg
-// These 6 appear in the "Who We Are" mosaic on the homepage.
-const galleryImages = [
-  { src: '/images/gallery/gallery-01.jpeg', alt: 'Tabassum Foundation activity – children receiving gifts' },
-  { src: '/images/gallery/gallery-02.jpeg', alt: 'Tabassum Foundation activity – school bag distribution' },
-  { src: '/images/gallery/gallery-03.jpeg', alt: 'Tabassum Foundation activity – creative learning circle' },
-  { src: '/images/gallery/gallery-04.jpeg', alt: 'Tabassum Foundation activity – food distribution' },
-  { src: '/images/gallery/gallery-05.jpeg', alt: 'Tabassum Foundation activity – community event' },
-  { src: '/images/gallery/gallery-06.jpeg', alt: 'Tabassum Foundation activity – health awareness' },
+  { name: 'Mr. Rameez Riaz',   role: 'Founder',          img: `${base}/images/team/rameez-riaz.jpeg` },
+  { name: 'Ms. Mah Noor',      role: 'Chairperson',      img: `${base}/images/team/mah-noor.jpeg` },
+  { name: 'Mr. Jalil Ahmed',   role: 'Co-Chairperson',   img: `${base}/images/team/jalil-ahmed.jpeg` },
+  { name: 'Mr. Kamran Elahi',  role: 'Vice Chairperson', img: `${base}/images/team/kamran-elahi.jpeg` },
+  { name: 'Ms. Waqar Un Nisa', role: 'General Secretary',img: `${base}/images/team/waqar-un-nisa.jpeg` },
+  { name: 'Ms. Misbah Zahoor', role: 'Joint Secretary',  img: `${base}/images/team/misbah-zahoor.jpeg` },
+  { name: 'Mr. Wajid Ali',     role: 'Finance Secretary',img: `${base}/images/team/wajid-ali.jpeg` },
 ];
 
-// ── LOCAL activity card images ────────────────────────────────────────────
-// Same folder — just different files for the two activity preview cards.
-const activityCard1Img = '/images/gallery/gallery-01.jpeg';
-const activityCard2Img = '/images/gallery/gallery-04.jpeg';
+const galleryImages = [
+  { src: `${base}/images/gallery/gallery-01.jpeg`, alt: 'Tabassum Foundation activity – children receiving gifts' },
+  { src: `${base}/images/gallery/gallery-02.jpeg`, alt: 'Tabassum Foundation activity – school bag distribution' },
+  { src: `${base}/images/gallery/gallery-03.jpeg`, alt: 'Tabassum Foundation activity – creative learning circle' },
+  { src: `${base}/images/gallery/gallery-04.jpeg`, alt: 'Tabassum Foundation activity – food distribution' },
+  { src: `${base}/images/gallery/gallery-05.jpeg`, alt: 'Tabassum Foundation activity – community event' },
+  { src: `${base}/images/gallery/gallery-06.jpeg`, alt: 'Tabassum Foundation activity – health awareness' },
+];
+
+const activityCard1Img = `${base}/images/gallery/gallery-01.jpeg`;
+const activityCard2Img = `${base}/images/gallery/gallery-04.jpeg`;
 ---
 
 <Base
@@ -67,16 +64,7 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
 >
   <Navbar transparent={true} />
 
-  <!-- ============================================================
-       HERO – Video Background
-  ============================================================ -->
   <section class="hero-video-container">
-    <!--
-      VIDEO PLACEHOLDER:
-      Place your hero video at:  public/video/hero.mp4
-      For faster loading, also add a compressed WebM version at: public/video/hero.webm
-      The poster image shows while the video loads — replace with a real photo.
-    -->
     <video
       autoplay
       muted
@@ -86,11 +74,10 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
       style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;"
       aria-hidden="true"
     >
-      <source src="/video/hero.webm" type="video/webm" />
-      <source src="/video/hero.mp4"  type="video/mp4" />
+      <source src={`${base}/video/hero.webm`} type="video/webm" />
+      <source src={`${base}/video/hero.mp4`}  type="video/mp4" />
     </video>
 
-    <!-- Fallback gradient (shown if video fails) -->
     <div class="absolute inset-0 z-[-1]"
       style="background: linear-gradient(135deg, #0d5c58 0%, #1a9990 50%, #3fb4aa 100%);">
     </div>
@@ -112,26 +99,18 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
           to children and mothers across Pakistan.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="/donate" class="btn-primary text-base py-3.5 px-8">
-            Donate Now ♥
-          </a>
-          <a href="/about" class="btn-outline text-base py-3.5 px-8">
-            Learn More →
-          </a>
+          <a href="/donate" class="btn-primary text-base py-3.5 px-8">Donate Now ♥</a>
+          <a href="/about" class="btn-outline text-base py-3.5 px-8">Learn More →</a>
         </div>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/60"
          aria-hidden="true">
       <div class="w-px h-10 bg-white/30 animate-bounce"></div>
     </div>
   </section>
 
-  <!-- ============================================================
-       WHO WE ARE
-  ============================================================ -->
   <section class="py-24 px-6 md:px-12 bg-white" aria-labelledby="who-we-are-heading">
     <div class="max-w-7xl mx-auto">
       <div class="grid md:grid-cols-2 gap-16 items-center">
@@ -155,7 +134,6 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
           <a href="/about" class="btn-primary">Our Story →</a>
         </div>
 
-        <!-- Gallery mosaic -->
         <div class="reveal gallery-grid" style="transition-delay: 0.2s" role="list" aria-label="Foundation activity photos">
           {galleryImages.map((img) => (
             <img
@@ -174,16 +152,12 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
     </div>
   </section>
 
-  <!-- Wave Divider -->
   <div class="wave-divider bg-white" aria-hidden="true">
     <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:80px; width:100%;">
       <path fill="#f0faf9" d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"/>
     </svg>
   </div>
 
-  <!-- ============================================================
-       FOCUS AREAS
-  ============================================================ -->
   <section class="py-24 px-6 md:px-12" style="background-color: #f0faf9;" aria-labelledby="focus-heading">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14 reveal">
@@ -201,9 +175,7 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
             style={`transition-delay: ${i * 0.1}s`}
           >
             <div class="text-4xl mb-4" aria-hidden="true">{area.icon}</div>
-            <h3 class="font-display font-semibold text-lg text-gray-800 mb-3 leading-snug">
-              {area.title}
-            </h3>
+            <h3 class="font-display font-semibold text-lg text-gray-800 mb-3 leading-snug">{area.title}</h3>
             <p class="text-gray-500 text-sm leading-relaxed">{area.desc}</p>
           </div>
         ))}
@@ -211,9 +183,6 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
     </div>
   </section>
 
-  <!-- ============================================================
-       EXECUTIVE BODIES
-  ============================================================ -->
   <section class="py-24 px-6 md:px-12 bg-white" aria-labelledby="team-heading">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14 reveal">
@@ -244,9 +213,6 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
     </div>
   </section>
 
-  <!-- ============================================================
-       DONATE CTA BANNER
-  ============================================================ -->
   <section
     class="relative py-24 px-6 md:px-12 overflow-hidden"
     style="background: linear-gradient(135deg, #0d5c58, #1a9990);"
@@ -271,9 +237,6 @@ const activityCard2Img = '/images/gallery/gallery-04.jpeg';
     </div>
   </section>
 
-  <!-- ============================================================
-       LATEST ACTIVITIES PREVIEW
-  ============================================================ -->
   <section class="py-24 px-6 md:px-12 bg-white" aria-labelledby="activities-heading">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4 reveal">
