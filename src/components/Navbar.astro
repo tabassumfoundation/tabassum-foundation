@@ -1,0 +1,193 @@
+---
+interface Props {
+  transparent?: boolean;
+}
+const { transparent = false } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<nav id="main-navbar" class={`navbar ${transparent ? 'is-transparent' : 'is-solid'} py-4 px-6 md:px-12`}>
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 group bg-transparent">
+      <img
+        id="nav-logo"
+        src="/favicon.png"
+        alt="Tabassum Foundation"
+        class="h-20 w-auto transition-all duration-300 group-hover:scale-105 bg-transparent"
+        loading="eager"
+      />
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="/" class={`nav-link font-medium text-sm transition-colors ${currentPath === '/' ? 'active-link' : ''}`}>
+        Home
+      </a>
+      <a href="/about" class={`nav-link font-medium text-sm transition-colors ${currentPath === '/about' ? 'active-link' : ''}`}>
+        About Us
+      </a>
+      <a href="/activities" class={`nav-link font-medium text-sm transition-colors ${currentPath === '/activities' ? 'active-link' : ''}`}>
+        Our Activities
+      </a>
+      <a href="/contact" class={`nav-link font-medium text-sm transition-colors ${currentPath === '/contact' ? 'active-link' : ''}`}>
+        Contact
+      </a>
+      <a href="/donate" class="donate-btn text-sm font-semibold py-2.5 px-5 rounded-md transition-all duration-200">
+        Donate Now ♥
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <button id="menu-toggle" class="md:hidden p-2 rounded-lg transition-colors" aria-label="Menu">
+      <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden mt-3 pb-3">
+    <div class="flex flex-col gap-1 pt-3 px-2">
+      <a href="/" class="mobile-link py-2.5 px-3 rounded-lg font-medium text-sm">Home</a>
+      <a href="/about" class="mobile-link py-2.5 px-3 rounded-lg font-medium text-sm">About Us</a>
+      <a href="/activities" class="mobile-link py-2.5 px-3 rounded-lg font-medium text-sm">Our Activities</a>
+      <a href="/contact" class="mobile-link py-2.5 px-3 rounded-lg font-medium text-sm">Contact</a>
+      <a href="/donate" class="mt-2 donate-btn text-sm font-semibold py-2.5 text-center rounded-md block">Donate Now ♥</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('main-navbar') as HTMLElement;
+  const toggle = document.getElementById('menu-toggle') as HTMLElement;
+  const menu   = document.getElementById('mobile-menu') as HTMLElement;
+
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+
+  if (navbar.classList.contains('is-transparent')) {
+    const onScroll = () => {
+      if (window.scrollY > 80) {
+        navbar.classList.remove('is-transparent');
+        navbar.classList.add('is-solid');
+      } else {
+        navbar.classList.remove('is-solid');
+        navbar.classList.add('is-transparent');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  /* TRANSPARENT — over video */
+  .navbar.is-transparent {
+    background: transparent;
+    box-shadow: none;
+  }
+  .navbar.is-transparent .nav-link {
+    color: rgba(255, 255, 255, 0.90);
+  }
+  .navbar.is-transparent .nav-link:hover,
+  .navbar.is-transparent .active-link {
+    color: #ffffff;
+  }
+  .navbar.is-transparent .nav-link::after {
+    background: white;
+  }
+  .navbar.is-transparent .donate-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(6px);
+  }
+  .navbar.is-transparent .donate-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+    border-color: white;
+  }
+  .navbar.is-transparent #hamburger-icon {
+    color: white;
+  }
+  .navbar.is-transparent #mobile-menu {
+    background: rgba(10, 70, 66, 0.95);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(12px);
+    margin: 0.5rem 0;
+  }
+  .navbar.is-transparent .mobile-link {
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .navbar.is-transparent .mobile-link:hover {
+    background: rgba(255, 255, 255, 0.10);
+    color: white;
+  }
+
+  /* SOLID — after scroll */
+  .navbar.is-solid {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 2px 24px rgba(13, 92, 88, 0.10);
+  }
+  .navbar.is-solid .nav-link {
+    color: #374151;
+  }
+  .navbar.is-solid .nav-link:hover,
+  .navbar.is-solid .active-link {
+    color: #1a9990;
+  }
+  .navbar.is-solid .nav-link::after {
+    background: #1a9990;
+  }
+  .navbar.is-solid .donate-btn {
+    background: #1a9990;
+    color: white;
+    border: 1.5px solid transparent;
+  }
+  .navbar.is-solid .donate-btn:hover {
+    background: #0d5c58;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(13, 92, 88, 0.25);
+  }
+  .navbar.is-solid #hamburger-icon {
+    color: #374151;
+  }
+  .navbar.is-solid #mobile-menu {
+    border-top: 1px solid #f0f0f0;
+    background: white;
+    border-radius: 0 0 0.75rem 0.75rem;
+  }
+  .navbar.is-solid .mobile-link {
+    color: #374151;
+  }
+  .navbar.is-solid .mobile-link:hover {
+    background: #f0faf9;
+    color: #1a9990;
+  }
+
+  /* Underline animation */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 2px;
+    border-radius: 2px;
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover::after,
+  .active-link::after {
+    width: 100%;
+  }
+</style>

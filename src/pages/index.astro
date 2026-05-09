@@ -1,0 +1,358 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+export const prerender = true;
+
+const focusAreas = [
+  {
+    icon: '📚',
+    title: 'Child Education & Learning Support',
+    desc: 'We support learning through school supplies, educational resources, and creative activities that build confidence and curiosity.',
+  },
+  {
+    icon: '🛡️',
+    title: 'Child Support, Care & Protection',
+    desc: 'We ensure children\'s safety and well-being through care, emotional support, and protection-focused community initiatives.',
+  },
+  {
+    icon: '🍎',
+    title: 'Child & Mother Health & Nutrition',
+    desc: 'We promote healthy children and mothers through food support, nutrition awareness, and accessible basic health programs.',
+  },
+  {
+    icon: '🌱',
+    title: 'Community Empowerment & Awareness',
+    desc: 'We raise awareness and encourage community participation to promote responsibility and sustainable self-reliance.',
+  },
+  {
+    icon: '🔧',
+    title: 'Vocational & Life Skills Development',
+    desc: 'We provide skill training and life education to support self-employment and build sustainable livelihoods.',
+  },
+];
+
+// Executive bodies — images come from tabasumfoundation.org (left intentionally)
+const teamMembers = [
+  { name: 'Mr. Rameez Riaz',   role: 'Founder',          img: '/images/team/rameez-riaz.jpeg' },
+  { name: 'Ms. Mah Noor',      role: 'Chairperson',      img: '/images/team/mah-noor.jpeg' },
+  { name: 'Mr. Jalil Ahmed',   role: 'Co-Chairperson',   img: '/images/team/jalil-ahmed.jpeg' },
+  { name: 'Mr. Kamran Elahi',  role: 'Vice Chairperson', img: '/images/team/kamran-elahi.jpeg' },
+{ name: 'Ms. Waqar Un Nisa', role: 'General Secretary',img: '/images/team/waqar-un-nisa.jpeg' },
+{ name: 'Ms. Misbah Zahoor', role: 'Joint Secretary',  img: '/images/team/misbah-zahoor.jpeg' },
+{ name: 'Mr. Wajid Ali',     role: 'Finance Secretary',img: '/images/team/wajid-ali.jpeg' },];
+// ── LOCAL gallery images ──────────────────────────────────────────────────
+// Place YOUR 57 photos inside:  public/images/gallery/
+// Name them: gallery-01.jpg, gallery-02.jpg … gallery-57.jpg
+// These 6 appear in the "Who We Are" mosaic on the homepage.
+const galleryImages = [
+  { src: '/images/gallery/gallery-01.jpeg', alt: 'Tabassum Foundation activity – children receiving gifts' },
+  { src: '/images/gallery/gallery-02.jpeg', alt: 'Tabassum Foundation activity – school bag distribution' },
+  { src: '/images/gallery/gallery-03.jpeg', alt: 'Tabassum Foundation activity – creative learning circle' },
+  { src: '/images/gallery/gallery-04.jpeg', alt: 'Tabassum Foundation activity – food distribution' },
+  { src: '/images/gallery/gallery-05.jpeg', alt: 'Tabassum Foundation activity – community event' },
+  { src: '/images/gallery/gallery-06.jpeg', alt: 'Tabassum Foundation activity – health awareness' },
+];
+
+// ── LOCAL activity card images ────────────────────────────────────────────
+// Same folder — just different files for the two activity preview cards.
+const activityCard1Img = '/images/gallery/gallery-01.jpeg';
+const activityCard2Img = '/images/gallery/gallery-04.jpeg';
+---
+
+<Base
+  title="Tabassum Foundation – Spreading Smiles Across Pakistan"
+  description="Tabassum Foundation is a humanitarian non-profit improving lives of children, mothers, and underserved communities across Pakistan through education, health, and community empowerment."
+>
+  <Navbar transparent={true} />
+
+  <!-- ============================================================
+       HERO – Video Background
+  ============================================================ -->
+  <section class="hero-video-container">
+    <!--
+      VIDEO PLACEHOLDER:
+      Place your hero video at:  public/video/hero.mp4
+      For faster loading, also add a compressed WebM version at: public/video/hero.webm
+      The poster image shows while the video loads — replace with a real photo.
+    -->
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="none"
+      style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;"
+      aria-hidden="true"
+    >
+      <source src="/video/hero.webm" type="video/webm" />
+      <source src="/video/hero.mp4"  type="video/mp4" />
+    </video>
+
+    <!-- Fallback gradient (shown if video fails) -->
+    <div class="absolute inset-0 z-[-1]"
+      style="background: linear-gradient(135deg, #0d5c58 0%, #1a9990 50%, #3fb4aa 100%);">
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content max-w-7xl mx-auto w-full px-6 md:px-12">
+      <div class="max-w-2xl">
+        <span class="inline-block text-teal-300 text-sm font-semibold tracking-widest uppercase mb-4 opacity-90">
+          Together, we can
+        </span>
+        <h1 class="font-display text-white text-5xl md:text-7xl font-bold leading-tight mb-6">
+          Build a world<br />
+          where <em class="text-teal-200 not-italic">all youth</em><br />
+          are safe
+        </h1>
+        <p class="text-white/80 text-lg md:text-xl leading-relaxed mb-8 max-w-lg">
+          Tabassum Foundation works to spread hope, dignity, and opportunity
+          to children and mothers across Pakistan.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/donate" class="btn-primary text-base py-3.5 px-8">
+            Donate Now ♥
+          </a>
+          <a href="/about" class="btn-outline text-base py-3.5 px-8">
+            Learn More →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/60"
+         aria-hidden="true">
+      <div class="w-px h-10 bg-white/30 animate-bounce"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHO WE ARE
+  ============================================================ -->
+  <section class="py-24 px-6 md:px-12 bg-white" aria-labelledby="who-we-are-heading">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="section-label">Who We Are</span>
+          <h2 id="who-we-are-heading" class="section-title mt-2 mb-6">
+            A foundation built on<br />
+            <span class="text-teal-700">compassion &amp; action</span>
+          </h2>
+          <p class="text-gray-600 leading-relaxed text-lg mb-6">
+            Tabassum Foundation is a humanitarian non-profit organization committed to improving
+            the lives of children, mothers, and underserved communities. Guided by compassion,
+            responsibility, and transparency, we work to promote education, health, nutrition,
+            child protection, and community empowerment.
+          </p>
+          <p class="text-gray-500 leading-relaxed mb-8">
+            Through meaningful programs and hands-on initiatives, we strive to spread hope,
+            dignity, and opportunity — believing that small actions can create lasting positive
+            change and brighter futures for all.
+          </p>
+          <a href="/about" class="btn-primary">Our Story →</a>
+        </div>
+
+        <!-- Gallery mosaic -->
+        <div class="reveal gallery-grid" style="transition-delay: 0.2s" role="list" aria-label="Foundation activity photos">
+          {galleryImages.map((img) => (
+            <img
+              src={img.src}
+              alt={img.alt}
+              loading="lazy"
+              decoding="async"
+              class="gallery-grid-img"
+              role="listitem"
+              width="400"
+              height="300"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider bg-white" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:80px; width:100%;">
+      <path fill="#f0faf9" d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"/>
+    </svg>
+  </div>
+
+  <!-- ============================================================
+       FOCUS AREAS
+  ============================================================ -->
+  <section class="py-24 px-6 md:px-12" style="background-color: #f0faf9;" aria-labelledby="focus-heading">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <span class="section-label">What We Do</span>
+        <h2 id="focus-heading" class="section-title mt-2">Our Focus Areas</h2>
+        <p class="text-gray-500 mt-4 max-w-xl mx-auto">
+          Five pillars that guide every program, every initiative, and every act of service.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {focusAreas.map((area, i) => (
+          <div
+            class={`focus-card card-hover reveal ${i === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+            style={`transition-delay: ${i * 0.1}s`}
+          >
+            <div class="text-4xl mb-4" aria-hidden="true">{area.icon}</div>
+            <h3 class="font-display font-semibold text-lg text-gray-800 mb-3 leading-snug">
+              {area.title}
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed">{area.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXECUTIVE BODIES
+  ============================================================ -->
+  <section class="py-24 px-6 md:px-12 bg-white" aria-labelledby="team-heading">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <span class="section-label">Leadership</span>
+        <h2 id="team-heading" class="section-title mt-2">Executive Bodies</h2>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6">
+        {teamMembers.map((member, i) => (
+          <div class="reveal text-center" style={`transition-delay: ${i * 0.08}s`}>
+            <div class="relative mb-3 mx-auto w-24 h-24">
+              <img
+                src={member.img}
+                alt={`${member.name} – ${member.role} at Tabassum Foundation`}
+                loading="lazy"
+                decoding="async"
+                width="96"
+                height="96"
+                class="w-24 h-24 rounded-full object-cover border-4 border-teal-100 shadow-md transition-transform hover:scale-105"
+              />
+              <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-teal-500 rounded-full border-2 border-white" aria-hidden="true"></div>
+            </div>
+            <h4 class="font-semibold text-gray-800 text-xs leading-tight">{member.name}</h4>
+            <p class="text-teal-600 text-xs mt-0.5">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DONATE CTA BANNER
+  ============================================================ -->
+  <section
+    class="relative py-24 px-6 md:px-12 overflow-hidden"
+    style="background: linear-gradient(135deg, #0d5c58, #1a9990);"
+    aria-labelledby="donate-cta-heading"
+  >
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10"
+      style="background: white; transform: translate(30%, -30%);" aria-hidden="true"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10"
+      style="background: white; transform: translate(-30%, 30%);" aria-hidden="true"></div>
+
+    <div class="max-w-3xl mx-auto text-center relative z-10 reveal">
+      <h2 id="donate-cta-heading" class="font-display text-white text-4xl md:text-5xl font-bold mb-6">
+        Your kindness can<br />change a life.
+      </h2>
+      <p class="text-teal-100 text-lg mb-8 max-w-lg mx-auto">
+        Every contribution — big or small — goes directly to programs that
+        support children and families in need across Pakistan.
+      </p>
+      <a href="/donate" class="inline-flex items-center gap-2 bg-white text-teal-700 font-bold py-4 px-10 rounded-lg text-lg hover:bg-teal-50 transition-colors shadow-lg">
+        ♥ Donate Now
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LATEST ACTIVITIES PREVIEW
+  ============================================================ -->
+  <section class="py-24 px-6 md:px-12 bg-white" aria-labelledby="activities-heading">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4 reveal">
+        <div>
+          <span class="section-label">Recent Work</span>
+          <h2 id="activities-heading" class="section-title mt-2">Our Activities</h2>
+        </div>
+        <a href="/activities" class="btn-primary">View All Activities →</a>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <article class="reveal card-hover rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+          <img
+            src={activityCard1Img}
+            alt="Spreading smiles – Tabassum Foundation gift pack distribution for children"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="400"
+            class="w-full h-56 object-cover"
+          />
+          <div class="p-6">
+            <span class="text-xs text-teal-600 font-semibold uppercase tracking-wider">Child Welfare</span>
+            <h3 class="font-display text-xl font-semibold text-gray-800 mt-2 mb-3">
+              Spreading Smiles — Gift Pack Distribution
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              We distributed colorful gift packs to children, bringing joy and excitement.
+              Seeing them sit patiently, waiting for their turn, holding their gifts — moments
+              like these motivate us to do even more.
+            </p>
+            <a href="/activities" class="inline-flex items-center gap-1.5 text-teal-600 font-semibold text-sm mt-4 hover:gap-3 transition-all">
+              Read more →
+            </a>
+          </div>
+        </article>
+
+        <article class="reveal card-hover rounded-2xl overflow-hidden border border-gray-100 shadow-sm" style="transition-delay:0.15s">
+          <img
+            src={activityCard2Img}
+            alt="Food distribution activity by Tabassum Foundation"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="400"
+            class="w-full h-56 object-cover"
+          />
+          <div class="p-6">
+            <span class="text-xs text-teal-600 font-semibold uppercase tracking-wider">Food Support</span>
+            <h3 class="font-display text-xl font-semibold text-gray-800 mt-2 mb-3">
+              Small Food Distribution Activity
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Tabassum Foundation carried out a food distribution activity, providing fresh meals
+              to deserving individuals. Our mission is simple — to spread smiles, offer support,
+              and stand with those who need care.
+            </p>
+            <a href="/activities" class="inline-flex items-center gap-1.5 text-teal-600 font-semibold text-sm mt-4 hover:gap-3 transition-all">
+              Read more →
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .gallery-grid-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gallery-grid-img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+export const prerender = true;
+
+const activities = [
+  {
+    title: 'Tabassum Foundation – Spreading Smiles!',
+    tag: 'Child Welfare',
+    desc: 'Today we distributed colorful gift packs to children, bringing joy and excitement to their day. Each child received a small bundle of happiness — a reminder that kindness doesn\'t need to be big to make a big difference. Seeing them sit patiently, waiting for their turn, and holding their gifts with pure excitement… moments like these motivate us to do even more. Together, we can brighten many more little lives.',
+    images: [
+      { src: '/images/activities/act01-a.jpeg', alt: 'Children receiving gift packs from Tabassum Foundation volunteers' },
+      { src: '/images/activities/act01-b.jpeg', alt: 'Gift pack distribution event – Tabassum Foundation' },
+      { src: '/images/activities/act01-c.jpeg', alt: 'Smiling children at Tabassum Foundation gift distribution' },
+    ],
+  },
+  {
+    title: 'Bringing Smiles with Tabassum Foundation',
+    tag: 'Education',
+    desc: 'Tabassum Foundation organised a special distribution drive to support underprivileged children by providing them with new school bags and essential supplies. The children, filled with excitement and joy, gathered as they received their colourful new bags — a small step towards encouraging education and building brighter futures. Together, we can make a difference — one smile at a time.',
+    images: [
+      { src: '/images/activities/act02-a.jpeg', alt: 'School bag distribution by Tabassum Foundation' },
+      { src: '/images/activities/act02-b.jpeg', alt: 'Children with new school bags – Tabassum Foundation' },
+      { src: '/images/activities/act02-c.jpeg', alt: 'Education drive organised by Tabassum Foundation' },
+    ],
+  },
+  {
+    title: 'Creative Learning Circle',
+    tag: 'Learning',
+    desc: 'In this heartwarming scene, a group of young children sit together in a circle on the grass, engaged in a creative and educational activity organised by Tabassum Foundation. Colourful folders decorated with heartfelt messages, shapes, and handmade designs are spread out in front of them, reflecting their creativity and enthusiasm. This activity promotes teamwork, confidence, and self-expression — core values that Tabassum Foundation strives to instil in every child.',
+    images: [
+      { src: '/images/activities/act03-a.jpeg', alt: 'Children in creative learning circle organised by Tabassum Foundation' },
+      { src: '/images/activities/act03-b.jpeg', alt: 'Colourful craft folders made by children – Tabassum Foundation' },
+      { src: '/images/activities/act03-c.jpeg', alt: 'Outdoor learning activity by Tabassum Foundation' },
+    ],
+  },
+  {
+    title: 'Small Food Distribution Activity',
+    tag: 'Food Support',
+    desc: 'Tabassum Foundation carried out a small food distribution activity, providing fresh meals to a few deserving individuals. Even a little act of kindness can make a big difference. Our mission is simple — to spread smiles, offer support, and stand with those who need care. Together, we continue to serve humanity with compassion.',
+    images: [
+      { src: '/images/activities/act04-a.jpeg', alt: 'Food distribution by Tabassum Foundation volunteers' },
+      { src: '/images/activities/act04-b.jpeg', alt: 'Fresh meals being distributed – Tabassum Foundation' },
+      { src: '/images/activities/act04-c.jpeg', alt: 'Community food support activity by Tabassum Foundation' },
+    ],
+  },
+];
+
+const tagColors: Record<string, string> = {
+  'Child Welfare': 'bg-rose-50 text-rose-600',
+  'Education':     'bg-blue-50 text-blue-600',
+  'Learning':      'bg-purple-50 text-purple-600',
+  'Food Support':  'bg-amber-50 text-amber-600',
+};
+---
+
+<Base
+  title="Our Activities – Tabassum Foundation"
+  description="Explore Tabassum Foundation's activities on the ground — gift distributions, school bag drives, creative learning circles, and food support programmes for children and families in Pakistan."
+>
+  <Navbar transparent={true} />
+
+  <!-- HERO: full-screen to match home page, with activities-specific video -->
+  <section class="hero-video-container">
+    <video autoplay muted loop playsinline preload="none"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"
+      aria-hidden="true">
+      <source src="/video/activities.webm" type="video/webm" />
+      <source src="/video/activities.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay" style="background:linear-gradient(135deg,rgba(13,92,88,0.82) 0%,rgba(13,92,88,0.52) 60%,rgba(0,0,0,0.45) 100%);"></div>
+    <div class="hero-content max-w-7xl mx-auto w-full px-6 md:px-12" style="margin-top:-80px;">
+      <div class="max-w-2xl">
+        <span class="inline-block text-teal-300 text-sm font-semibold tracking-widest uppercase mb-4 opacity-90">On the Ground</span>
+        <h1 class="font-display text-white text-5xl md:text-6xl font-bold leading-tight mb-5">
+          Our <em class="text-teal-200 not-italic">Activities</em>
+        </h1>
+        <p class="text-white/80 text-lg leading-relaxed max-w-lg">
+          Where compassion meets action — real stories and moments from the field.
+          Every initiative is a step toward a brighter, more dignified future for
+          children and families across Pakistan.
+        </p>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="/donate" class="btn-primary py-3 px-7">Support Our Work ♥</a>
+          <a href="/contact" class="btn-outline py-3 px-7">Volunteer with Us →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities List -->
+  <section class="py-20 px-6 md:px-12 bg-white">
+    <div class="max-w-7xl mx-auto space-y-20">
+      {activities.map((act, i) => (
+        <article
+          class={`reveal grid md:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'md:grid-flow-dense' : ''}`}
+          style={`transition-delay: ${i * 0.1}s`}
+       >
+          <!-- Images -->
+          <div class={`grid grid-cols-3 gap-3 ${i % 2 === 1 ? 'md:col-start-2' : ''}`}>
+            {act.images.map((img, j) => (
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+                decoding="async"
+                width={j === 0 ? 600 : 200}
+                height={j === 0 ? 350 : 160}
+                class={`w-full object-cover rounded-xl ${j === 0 ? 'h-52 col-span-2' : 'h-24'} ${j === 2 ? 'mt-auto' : ''}`}
+              />
+            ))}
+          </div>
+
+          <!-- Text -->
+          <div class={i % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
+            <span class={`inline-block text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full mb-4 ${tagColors[act.tag] || 'bg-teal-50 text-teal-600'}`}>
+              {act.tag}
+            </span>
+            <h2 class="font-display text-2xl md:text-3xl font-semibold text-gray-800 mb-4 leading-snug">
+              {act.title}
+            </h2>
+            <p class="text-gray-500 leading-relaxed text-base">{act.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 px-6 md:px-12 text-center" style="background:#f0faf9;" aria-labelledby="act-cta-heading">
+    <div class="reveal max-w-xl mx-auto">
+      <h3 id="act-cta-heading" class="font-display text-3xl font-semibold text-gray-800 mb-4">Want to be part of the change?</h3>
+      <p class="text-gray-500 mb-6">Join us in spreading smiles across Pakistan.</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/donate" class="btn-primary">Donate Now ♥</a>
+        <a href="/contact" class="inline-flex items-center gap-2 bg-white text-teal-700 border-2 border-teal-200 font-semibold py-3 px-6 rounded-md hover:bg-teal-50 transition-colors">
+          Volunteer with Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

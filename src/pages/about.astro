@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+export const prerender = true;
+
+// Executive bodies — KEEP existing URLs (profile pics not yet replaced)
+const teamMembers = [
+  { name: 'Mr. Rameez Riaz',   role: 'Founder',          img: '/images/team/rameez-riaz.jpeg' },
+  { name: 'Ms. Mah Noor',      role: 'Chairperson',      img: '/images/team/mah-noor.jpeg' },
+  { name: 'Mr. Jalil Ahmed',   role: 'Co-Chairperson',   img: '/images/team/jalil-ahmed.jpeg' },
+  { name: 'Mr. Kamran Elahi',  role: 'Vice Chairperson', img: '/images/team/kamran-elahi.jpeg' },
+{ name: 'Ms. Waqar Un Nisa', role: 'General Secretary',img: '/images/team/waqar-un-nisa.jpeg' },
+{ name: 'Ms. Misbah Zahoor', role: 'Joint Secretary',  img: '/images/team/misbah-zahoor.jpeg' },
+{ name: 'Mr. Wajid Ali',     role: 'Finance Secretary',img: '/images/team/wajid-ali.jpeg' },];
+
+// ── LOCAL gallery images for the "Who We Are" mosaic ─────────────────────
+const aboutGallery = [
+  { src: '/images/gallery/gallery-07.jpeg', alt: 'Tabassum Foundation volunteers with children' },
+  { src: '/images/gallery/gallery-08.jpeg', alt: 'Community programme organised by Tabassum Foundation' },
+  { src: '/images/gallery/gallery-09.jpeg', alt: 'Educational activity by Tabassum Foundation' },
+  { src: '/images/gallery/gallery-51.jpeg', alt: 'Health awareness session by Tabassum Foundation' },
+];
+---
+
+<Base
+  title="About Us – Tabassum Foundation"
+  description="Learn about Tabassum Foundation — our mission, vision, and the dedicated team working to improve the lives of children, mothers, and underserved communities across Pakistan."
+>
+  <Navbar transparent={true} />
+
+  <!-- HERO: same full-screen height as home page, with about-specific video -->
+  <section class="hero-video-container">
+    <video autoplay muted loop playsinline preload="none"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"
+      aria-hidden="true">
+      <source src="/video/about.webm" type="video/webm" />
+      <source src="/video/about.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay" style="background:linear-gradient(135deg,rgba(13,92,88,0.82) 0%,rgba(13,92,88,0.52) 60%,rgba(0,0,0,0.45) 100%);"></div>
+    <div class="hero-content max-w-7xl mx-auto w-full px-6 md:px-12" style="margin-top:-80px;">
+      <div class="max-w-2xl">
+        <span class="inline-block text-teal-300 text-sm font-semibold tracking-widest uppercase mb-4 opacity-90">Our Story</span>
+        <h1 class="font-display text-white text-5xl md:text-6xl font-bold leading-tight mb-5">
+          About <em class="text-teal-200 not-italic">Tabassum</em><br />Foundation
+        </h1>
+        <p class="text-white/80 text-lg leading-relaxed max-w-lg">
+          Guided by compassion, responsibility, and transparency — working every day to bring
+          hope, dignity, and opportunity to children and mothers across Pakistan.
+        </p>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="/donate" class="btn-primary py-3 px-7">Donate Now ♥</a>
+          <a href="/activities" class="btn-outline py-3 px-7">Our Activities →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Who We Are -->
+  <section class="py-20 px-6 md:px-12 bg-white" aria-labelledby="about-who-heading">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="section-label">Who We Are</span>
+          <h2 id="about-who-heading" class="section-title mt-2 mb-6">A foundation rooted in community</h2>
+          <p class="text-gray-600 leading-relaxed text-lg mb-5">
+            Tabassum Foundation is a humanitarian non-profit organization committed to improving
+            the lives of children, mothers, and underserved communities. Guided by compassion,
+            responsibility, and transparency, we work to promote education, health, nutrition,
+            child protection, and community empowerment.
+          </p>
+          <p class="text-gray-500 leading-relaxed">
+            Through meaningful programs and hands-on initiatives, we strive to spread hope,
+            dignity, and opportunity, believing that small actions can create lasting positive
+            change and brighter futures for all.
+          </p>
+        </div>
+
+        <!-- 2×2 mosaic — local images -->
+        <div class="reveal grid grid-cols-2 gap-4" style="transition-delay:0.2s" aria-label="Foundation photo gallery">
+          {aboutGallery.map((img, i) => (
+            <img
+              src={img.src}
+              alt={img.alt}
+              loading="lazy"
+              decoding="async"
+              width="400"
+              height="300"
+              class={`w-full h-44 object-cover rounded-xl ${i === 1 ? 'mt-6' : ''} ${i === 3 ? '-mt-6' : ''}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-20 px-6 md:px-12" style="background:#f0faf9;" aria-labelledby="mission-heading">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <span class="section-label">Our Approach</span>
+        <h2 id="mission-heading" class="section-title mt-2">Mission &amp; Vision</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="reveal bg-white rounded-2xl p-8 border border-teal-50 shadow-sm card-hover relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #1a9990, #3fb4aa);" aria-hidden="true"></div>
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6" style="background: linear-gradient(135deg, #d9f2ef, #b3e5e0);" aria-hidden="true">
+            🎯
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-gray-800 mb-4">Our Mission</h3>
+          <p class="text-teal-700 font-medium italic text-base mb-4 leading-relaxed">
+            "To promote the well-being of children and mothers through education, healthcare,
+            nutrition, protection, and community awareness programs."
+          </p>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            By actively engaging and empowering communities, we aim to create sustainable solutions,
+            strengthen social responsibility, and drive positive, lasting social change rooted in
+            dignity and care.
+          </p>
+        </div>
+
+        <div class="reveal bg-white rounded-2xl p-8 border border-teal-50 shadow-sm card-hover relative overflow-hidden" style="transition-delay:0.15s">
+          <div class="absolute top-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #3fb4aa, #7dd0c9);" aria-hidden="true"></div>
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-6" style="background: linear-gradient(135deg, #d9f2ef, #b3e5e0);" aria-hidden="true">
+            🌟
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-gray-800 mb-4">Our Vision</h3>
+          <p class="text-teal-700 font-medium italic text-base mb-4 leading-relaxed">
+            "To build a society where every child and mother lives a safe, healthy, educated,
+            and dignified life."
+          </p>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            We envision children growing in nurturing environments that support their physical,
+            emotional, and educational development, while mothers are empowered with knowledge,
+            skills, and confidence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Executive Bodies -->
+  <section class="py-20 px-6 md:px-12 bg-white" aria-labelledby="exec-heading">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <span class="section-label">Our Leadership</span>
+        <h2 id="exec-heading" class="section-title mt-2">Executive Bodies</h2>
+        <p class="text-gray-500 mt-3 max-w-lg mx-auto">
+          Dedicated individuals committed to guiding the Foundation towards greater impact.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 lg:gap-10">
+        {teamMembers.map((member, i) => (
+          <div class="reveal text-center group" style={`transition-delay: ${i * 0.09}s`}>
+            <div class="relative mb-4 mx-auto w-28 h-28">
+              <img
+                src={member.img}
+                alt={`${member.name} – ${member.role}, Tabassum Foundation`}
+                loading="lazy"
+                decoding="async"
+                width="112"
+                height="112"
+                class="w-28 h-28 rounded-full object-cover border-4 border-teal-100 shadow-md group-hover:border-teal-400 transition-colors"
+              />
+            </div>
+            <h4 class="font-semibold text-gray-800 text-sm">{member.name}</h4>
+            <p class="text-teal-600 text-xs mt-1 font-medium">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

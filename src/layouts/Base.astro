@@ -1,0 +1,118 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: string;
+}
+
+const {
+  title = 'Tabassum Foundation – Spreading Smiles Across Pakistan',
+  description = 'Tabassum Foundation is a humanitarian non-profit committed to improving the lives of children, mothers, and underserved communities in Pakistan through education, health, nutrition, and community empowerment.',
+  image = '/images/og-default.jpg',
+  canonicalURL = Astro.url.href,
+  type = 'website',
+} = Astro.props;
+
+const siteName = 'Tabassum Foundation';
+const siteURL  = 'https://tabasumfoundation.org';
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content="Tabassum Foundation, Pakistan NGO, child welfare, mother health, education NGO, non-profit Pakistan, humanitarian organization, child protection, community empowerment" />
+  <meta name="author" content="Tabassum Foundation" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content={type} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:site_name"   content={siteName} />
+  <meta property="og:image"       content={`${siteURL}${image}`} />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale"      content="en_PK" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={`${siteURL}${image}`} />
+
+  <!-- PWA / Theme -->
+  <meta name="theme-color" content="#1a9990" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon"      href="/apple-touch-icon.png" />
+
+  <!-- Performance: Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Fonts (display=swap for no layout shift) -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+  />
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "Tabassum Foundation",
+    "alternateName": "Tabassum Foundation Pakistan",
+    "url": "https://tabasumfoundation.org",
+    "logo": "https://tabasumfoundation.org/favicon.png",
+    "description": "A humanitarian non-profit committed to improving the lives of children, mothers, and underserved communities in Pakistan.",
+    "address": { "@type": "PostalAddress", "addressCountry": "PK" },
+    "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "url": "https://tabasumfoundation.org/contact" }
+  }
+  </script>
+</head>
+
+<body>
+  <slot />
+
+  <script>
+    // Scroll-reveal
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Navbar scroll state
+    const navbar = document.querySelector('.navbar');
+    const onScroll = () => {
+      if (!navbar) return;
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+        navbar.classList.remove('top');
+      } else {
+        navbar.classList.remove('scrolled');
+        navbar.classList.add('top');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
