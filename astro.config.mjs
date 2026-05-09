@@ -1,9 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
   site: 'https://tabassumfoundation.github.io',
-  base: '/tabassum-foundation',
+  base: isProd ? '/tabassum-foundation' : '/',
   output: 'static',
   integrations: [tailwind()],
   image: {
